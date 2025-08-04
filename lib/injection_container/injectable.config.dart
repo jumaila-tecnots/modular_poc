@@ -29,8 +29,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final registerModule = _$RegisterModule();
-    gh.lazySingleton<_i1033.ThemeServiceProvider>(
-        () => _i1033.ThemeServiceProvider());
+
     gh.lazySingleton<_i895.Connectivity>(() => registerModule.connectivity);
     gh.lazySingleton<_i441.NetworkInfo>(
         () => _i441.NetworkInfoImpl(gh<_i895.Connectivity>()));

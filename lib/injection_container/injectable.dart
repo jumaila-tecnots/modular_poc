@@ -15,7 +15,7 @@ final getIt = GetIt.instance;
 Future<void> configureInjection() async {
   getIt.init();
   getIt.registerLazySingleton<NavigationService>(() => NavigationService());
-  getIt.registerLazySingleton<ThemeServiceProvider>(() => ThemeServiceProvider());
+
 }
 
 @module

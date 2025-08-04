@@ -22,6 +22,12 @@ class _ShellScreenState extends State<ShellScreen> {
     _loadModuleScreen(_selectedIndex);
   }
 
+  @override
+  void didUpdateWidget(ShellScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _loadModuleScreen(_selectedIndex); // Ensure state is preserved
+  }
+
   void _loadModuleScreen(int index) {
     if (index >= widget.modules.length) return; // Prevent index out of bounds
     final routeName = widget.modules[index]['route']!;
@@ -38,9 +44,8 @@ class _ShellScreenState extends State<ShellScreen> {
 
     setState(() {
       _selectedIndex = index;
-      _currentScreen = builder != null
-          ? builder(context)
-          : const Center(child: Text('Module not found'));
+      _currentScreen = builder!(context);
+
     });
   }
 
