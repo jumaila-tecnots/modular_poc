@@ -43,7 +43,8 @@ class CounterModule implements Module {
   Map<String, WidgetBuilder> getRoutes() {
     return {
       '/posts': (context) => ChangeNotifierProvider(
-        create: (_) => ThemeServiceProvider(),
+
+        create: (BuildContext context) {  },
         child: BlocProvider(
           create: (context) =>
           ModuleManager().locator<PostsBloc>()..add(const PostsEvent.getPosts()),

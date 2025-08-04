@@ -12,6 +12,8 @@ class PostsUseCase implements UsecaseWithoutParams<List<PostEntity>>{
 
 final IPostsRepo postsRepo;
 
+final TodoRepository profileRepo;
+
 PostsUseCase({required this.postsRepo});
 
   @override

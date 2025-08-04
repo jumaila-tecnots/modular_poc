@@ -18,7 +18,7 @@ class ModuleManager {
   GetIt get locator => _locator;
 
   void registerModule(Module module) {
-
+    module.registerDependencies(_locator);
     _routes.addAll(module.getRoutes());
     _modules.add(module);
 

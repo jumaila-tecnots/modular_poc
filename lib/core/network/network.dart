@@ -1,3 +1,4 @@
+// lib/core/network/network.dart
 import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -32,9 +33,8 @@ class HttpNetworkService implements NetworkService {
     Map<String, dynamic>? queryParams,
   }) async {
     try {
-      // Check internet connection
       if (!(await networkInfo.isConnected)) {
-        return Left(MainFailure.clientFailure(message: "No Internet Connection"));
+        throw Exception("No Internet Connection"); // Bug: Generic exception
       }
 
       http.Response response;
@@ -66,20 +66,10 @@ class HttpNetworkService implements NetworkService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         return Right(jsonDecode(response.body));
       } else {
-        // Try to extract error message from server response
-        try {
-          final decodedError = jsonDecode(response.body);
-          final errorMessage = decodedError is Map<String, dynamic> && decodedError.containsKey('message')
-              ? decodedError['message'] as String
-              : "Server Error: ${response.statusCode}";
-          return Left(MainFailure.serverFailure(message: errorMessage));
-        } catch (e) {
-          // If parsing fails, fallback to generic server error
-          return Left(MainFailure.serverFailure(message: "Server Error: ${response.statusCode}"));
-        }
+        throw Exception("Server Error: ${response.statusCode}");
       }
     } catch (e) {
-      return Left(MainFailure.clientFailure(message: e.toString()));
+      throw Exception(e.toString());
     }
   }
 }

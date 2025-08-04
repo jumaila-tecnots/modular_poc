@@ -8,14 +8,16 @@ import 'package:modular_poc/injection_container/injectable.config.dart';
 
 import 'navigation_service.dart';
 
+
 final getIt = GetIt.instance;
 //final GetIt conn = GetIt.instance;
 
 @InjectableInit()
 Future<void> configureInjection() async {
   getIt.init();
-  getIt.registerLazySingleton<NavigationService>(() => NavigationService());
-
+  getIt.registerFactory<NavigationService>(() => NavigationService());
+  getIt.registerFactory<ThemeServiceProvider>(() => ThemeServiceProvider());
+  //getIt.registerFactory<Connectivity>(() => Connectivity());
 }
 
 @module
