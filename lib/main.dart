@@ -27,12 +27,11 @@ void main() async {
   [{"name": "Posts", "route": "/posts", "moduleClass": "CounterModule"},
     
     {"name": "To-Do", "route": "/todo", "moduleClass": "TodoModule"},
-    {"name": "Profile", "route": "/profile", "moduleClass": "ProfileModule"}
+  
     
   ]
   ''';
-  //{"name": "Posts", "route": "/posts", "moduleClass": "CounterModule"},
-  //{"name": "To-Do", "route": "/todo", "moduleClass": "TodoModule"}
+
 
   final moduleData = jsonDecode(mockJson) as List<dynamic>;
 
