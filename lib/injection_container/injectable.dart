@@ -17,7 +17,7 @@ Future<void> configureInjection() async {
   getIt.init();
   getIt.registerFactory<NavigationService>(() => NavigationService());
   getIt.registerFactory<ThemeServiceProvider>(() => ThemeServiceProvider());
-  //getIt.registerFactory<Connectivity>(() => Connectivity());
+  getIt.registerFactory<Connectivity>(() => Connectivity());
 }
 
 @module
