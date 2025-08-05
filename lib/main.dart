@@ -26,9 +26,8 @@ void main() async {
   const mockJson = '''
   [{"name": "Posts", "route": "/posts", "moduleClass": "CounterModule"},
     
-    {"name": "To-Do", "route": "/todo", "moduleClass": "TodoModule"},
+    {"name": "To-Do", "route": "/todo", "moduleClass": "TodoModule"}
   
-    
   ]
   ''';
 
