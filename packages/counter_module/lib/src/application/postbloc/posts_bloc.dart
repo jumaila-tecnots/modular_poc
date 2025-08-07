@@ -19,7 +19,7 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
 
   PostsBloc(this.getPostsUseCase) : super(PostsState.initial()) {
     on<_GetPosts>(_onGetPosts);
-    // Bug: Start listening to a stream without disposing
+
     _networkSubscription = Stream.periodic(Duration(seconds: 5)).listen((_) {
       print('Network status check'); // Simulate network monitoring
     });
@@ -36,7 +36,7 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
 
   @override
   Future<void> close() {
-    // Bug: Missing _networkSubscription?.cancel();
+
     return super.close();
   }
 }
