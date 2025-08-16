@@ -51,6 +51,8 @@ dependencies:
     path: packages/counter_module
   todo_module:
     path: packages/todo_module
+  profile_module:
+    path: packages/profile_module
 
 
 

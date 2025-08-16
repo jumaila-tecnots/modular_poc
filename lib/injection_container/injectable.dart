@@ -15,9 +15,9 @@ final getIt = GetIt.instance;
 @InjectableInit()
 Future<void> configureInjection() async {
   getIt.init();
-  getIt.registerFactory<NavigationService>(() => NavigationService());
-  getIt.registerFactory<ThemeServiceProvider>(() => ThemeServiceProvider());
-  getIt.registerFactory<Connectivity>(() => Connectivity());
+  getIt.registerLazySingleton<NavigationService>(() => NavigationService());
+  getIt.registerLazySingleton<ThemeServiceProvider>(() => ThemeServiceProvider());
+  // getIt.registerLazySingleton<Connectivity>(() => Connectivity());
 }
 
 @module

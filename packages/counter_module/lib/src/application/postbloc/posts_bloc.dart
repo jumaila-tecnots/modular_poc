@@ -36,7 +36,7 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
 
   @override
   Future<void> close() {
-
+    _networkSubscription?.cancel();
     return super.close();
   }
 }

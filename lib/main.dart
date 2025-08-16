@@ -5,7 +5,7 @@ import 'package:modular_poc/theme.dart';
 import 'package:module_manager/module_manager.dart';
 import 'package:counter_module/counter_module.dart' as counter;
 import 'package:todo_module/todo_module.dart' as todo;
-
+import 'package:profile_module/profile_module.dart' as profile;
 import 'core/utils/theme_service.dart';
 import 'injection_container/injectable.dart';
 import 'shell_screen.dart';
@@ -14,6 +14,7 @@ import 'shell_screen.dart';
 final Map<String, Module Function()> moduleFactories = {
   'CounterModule': () => counter.CounterModule(),
   'TodoModule': () => todo.TodoModule(),
+  'ProfileModule': () => profile.ProfileModule(),
 
 };
 
@@ -26,7 +27,8 @@ void main() async {
   const mockJson = '''
   [{"name": "Posts", "route": "/posts", "moduleClass": "CounterModule"},
     
-    {"name": "To-Do", "route": "/todo", "moduleClass": "TodoModule"}
+    {"name": "To-Do", "route": "/todo", "moduleClass": "TodoModule"},
+    {"name": "Users", "route": "/users", "moduleClass": "ProfileModule"}
   
   ]
   ''';
