@@ -15,7 +15,7 @@ part 'posts_bloc.freezed.dart';
 @Injectable()
 class PostsBloc extends Bloc<PostsEvent, PostsState> {
   final PostsUseCase getPostsUseCase;
-  StreamSubscription? _networkSubscription; // Bug: Undisposed subscription
+  StreamSubscription? _networkSubscription; 
 
   PostsBloc(this.getPostsUseCase) : super(PostsState.initial()) {
     on<_GetPosts>(_onGetPosts);
