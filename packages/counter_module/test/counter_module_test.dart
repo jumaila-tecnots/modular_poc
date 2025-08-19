@@ -1,6 +1,6 @@
 // import 'package:flutter_test/flutter_test.dart';
 //
-// import 'package:counter_module/counter_module.dart';
+// import 'package:counter_module/profile_module.dart';
 //
 // void main() {
 //   test('adds one to input values', () {

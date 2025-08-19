@@ -1,9 +1,11 @@
 import 'dart:convert';
+
+import 'package:counter_module/counter_module.dart' as counter;
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:modular_poc/theme.dart';
 import 'package:module_manager/module_manager.dart';
-import 'package:counter_module/counter_module.dart' as counter;
+import 'package:profile_module/profile_module.dart' as profile;
+import 'package:provider/provider.dart';
 import 'package:todo_module/todo_module.dart' as todo;
 
 import 'core/utils/theme_service.dart';
@@ -14,7 +16,7 @@ import 'shell_screen.dart';
 final Map<String, Module Function()> moduleFactories = {
   'CounterModule': () => counter.CounterModule(),
   'TodoModule': () => todo.TodoModule(),
-
+  'ProfileModule': () => profile.ProfileModule(),
 };
 
 void main() async {
@@ -26,11 +28,12 @@ void main() async {
   const mockJson = '''
   [{"name": "Posts", "route": "/posts", "moduleClass": "CounterModule"},
     
-    {"name": "To-Do", "route": "/todo", "moduleClass": "TodoModule"}
+    {"name": "To-Do", "route": "/todo", "moduleClass": "TodoModule"},
+        
+    {"name": "Profile", "route": "/profile", "moduleClass": "ProfileModule"}
   
   ]
   ''';
-
 
   final moduleData = jsonDecode(mockJson) as List<dynamic>;
 
@@ -71,9 +74,11 @@ class MyApp extends StatelessWidget {
             title: 'Modular Clean App',
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
-            themeMode: themeService.isDarkModeOn ? ThemeMode.dark : ThemeMode.light,
+            themeMode:
+                themeService.isDarkModeOn ? ThemeMode.dark : ThemeMode.light,
             home: ShellScreen(modules: modules),
-            onGenerateRoute: ModuleManager().generateRoute, // Ensure route generation
+            onGenerateRoute:
+                ModuleManager().generateRoute, // Ensure route generation
           );
         },
       ),

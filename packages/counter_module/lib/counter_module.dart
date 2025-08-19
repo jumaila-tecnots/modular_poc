@@ -34,7 +34,7 @@ class CounterModule implements Module {
     );
 
     /// ✅ Register Bloc as factory instead of singleton
-    locator.registerFactory<PostsBloc>(
+    locator.registerLazySingleton<PostsBloc>(
           () => PostsBloc(locator<PostsUseCase>()),
     );
   }
@@ -43,7 +43,6 @@ class CounterModule implements Module {
   Map<String, WidgetBuilder> getRoutes() {
     return {
       '/posts': (context) => ChangeNotifierProvider(
-
         create: (BuildContext context) {  },
         child: BlocProvider(
           create: (context) =>

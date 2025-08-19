@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:module_manager/module_manager.dart';
+import 'package:provider/provider.dart';
+
 import 'core/utils/theme_service.dart';
 
 class ShellScreen extends StatefulWidget {
@@ -20,6 +21,7 @@ class _ShellScreenState extends State<ShellScreen> {
   void initState() {
     super.initState();
     _loadModuleScreen(_selectedIndex);
+    _loadModuleBloc(_selectedIndex);
   }
 
   @override
@@ -45,8 +47,16 @@ class _ShellScreenState extends State<ShellScreen> {
     setState(() {
       _selectedIndex = index;
       _currentScreen = builder!(context);
-
     });
+  }
+
+  void _loadModuleBloc(int index) {
+    if (index >= widget.modules.length) return; // Prevent index out of bounds
+
+    // Loop through all registered modules
+    for (final module in ModuleManager().modules) {
+      module.registerDependencies(ModuleManager().locator);
+    }
   }
 
   @override
@@ -61,8 +71,9 @@ class _ShellScreenState extends State<ShellScreen> {
           actions: [
             Switch(
               value: Provider.of<ThemeServiceProvider>(context).isDarkModeOn,
-              onChanged: (_) => Provider.of<ThemeServiceProvider>(context, listen: false)
-                  .toggleTheme(),
+              onChanged: (_) =>
+                  Provider.of<ThemeServiceProvider>(context, listen: false)
+                      .toggleTheme(),
             ),
           ],
         ),
@@ -76,8 +87,9 @@ class _ShellScreenState extends State<ShellScreen> {
         actions: [
           Switch(
             value: Provider.of<ThemeServiceProvider>(context).isDarkModeOn,
-            onChanged: (_) => Provider.of<ThemeServiceProvider>(context, listen: false)
-                .toggleTheme(),
+            onChanged: (_) =>
+                Provider.of<ThemeServiceProvider>(context, listen: false)
+                    .toggleTheme(),
           ),
         ],
       ),
@@ -88,10 +100,10 @@ class _ShellScreenState extends State<ShellScreen> {
         items: widget.modules
             .map(
               (module) => BottomNavigationBarItem(
-            icon: const Icon(Icons.extension),
-            label: module['name'],
-          ),
-        )
+                icon: const Icon(Icons.extension),
+                label: module['name'],
+              ),
+            )
             .toList(),
       ),
     );

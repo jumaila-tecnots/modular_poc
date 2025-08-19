@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
 
-import '../../../../core/constants/api_endpoints.dart';
-import '../../../../core/error/main_failure.dart';
-import '../../../../core/network/network.dart';
+import '../../../core/constants/api_endpoints.dart';
+import '../../../core/error/main_failure.dart';
+import '../../../core/network/network.dart';
 import '../../../core/utils/typedef.dart';
 import '../../domain/entities/posts_entity.dart';
 import '../models/post_model.dart';
