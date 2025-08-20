@@ -15,7 +15,7 @@ part 'posts_bloc.freezed.dart';
 @Injectable()
 class PostsBloc extends Bloc<PostsEvent, PostsState> {
   final PostsUseCase getPostsUseCase;
-  StreamSubscription? _networkSubscription; 
+  StreamSubscription? _networkSubscription;
 
   PostsBloc(this.getPostsUseCase) : super(PostsState.initial()) {
     on<_GetPosts>(_onGetPosts);
@@ -27,16 +27,21 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
 
   void _onGetPosts(_GetPosts event, Emitter<PostsState> emit) async {
     emit(state.copyWith(isLoading: true));
-    final Either<MainFailure, List<PostEntity>> postsOptions = await getPostsUseCase();
+    final Either<MainFailure, List<PostEntity>> postsOptions =
+        await getPostsUseCase();
     emit(postsOptions.fold(
-          (failure) => state.copyWith(isLoading: false, isError: true, isSuccess: false, message: failure.message),
-          (success) => state.copyWith(isLoading: false, isError: false, isSuccess: true, posts: success),
+      (failure) => state.copyWith(
+          isLoading: false,
+          isError: true,
+          isSuccess: false,
+          message: failure.message),
+      (success) => state.copyWith(
+          isLoading: false, isError: false, isSuccess: true, posts: success),
     ));
   }
 
   @override
   Future<void> close() {
-
     return super.close();
   }
 }

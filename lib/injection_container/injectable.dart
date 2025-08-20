@@ -4,10 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:modular_poc/injection_container/injectable.config.dart';
 
-
-
 import 'navigation_service.dart';
-
 
 final getIt = GetIt.instance;
 //final GetIt conn = GetIt.instance;
@@ -15,15 +12,14 @@ final getIt = GetIt.instance;
 @InjectableInit()
 Future<void> configureInjection() async {
   getIt.init();
+  // getIt.registerFactory<Connectivity>(() => Connectivity());
   getIt.registerFactory<NavigationService>(() => NavigationService());
   getIt.registerFactory<ThemeServiceProvider>(() => ThemeServiceProvider());
-  getIt.registerFactory<Connectivity>(() => Connectivity());
+  //
 }
 
 @module
 abstract class RegisterModule {
   @lazySingleton
   Connectivity get connectivity => Connectivity();
-
-
 }

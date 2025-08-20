@@ -14,7 +14,6 @@ import 'shell_screen.dart';
 final Map<String, Module Function()> moduleFactories = {
   'CounterModule': () => counter.CounterModule(),
   'TodoModule': () => todo.TodoModule(),
-
 };
 
 void main() async {
@@ -25,14 +24,11 @@ void main() async {
 
   const mockJson = '''
   [{"name": "Posts", "route": "/posts", "moduleClass": "CounterModule"},
-    
     {"name": "To-Do", "route": "/todo", "moduleClass": "TodoModule"}
-  
   ]
   ''';
 
-
-  final moduleData = jsonDecode(mockJson) as List<dynamic>;
+  List<dynamic> moduleData = jsonDecode(mockJson);
 
   // Dynamically register modules
   for (var module in moduleData) {
@@ -46,13 +42,18 @@ void main() async {
     }
   }
 
-  runApp(MyApp(moduleData: moduleData));
+  runApp(MyApp(
+    moduleData: moduleData,
+    moduleManager: moduleManager,
+  ));
 }
 
 class MyApp extends StatelessWidget {
+  final ModuleManager moduleManager;
   final List<dynamic> moduleData;
 
-  const MyApp({super.key, required this.moduleData});
+  const MyApp(
+      {super.key, required this.moduleManager, required this.moduleData});
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +72,11 @@ class MyApp extends StatelessWidget {
             title: 'Modular Clean App',
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
-            themeMode: themeService.isDarkModeOn ? ThemeMode.dark : ThemeMode.light,
+            themeMode:
+                themeService.isDarkModeOn ? ThemeMode.dark : ThemeMode.light,
             home: ShellScreen(modules: modules),
-            onGenerateRoute: ModuleManager().generateRoute, // Ensure route generation
+            onGenerateRoute:
+                moduleManager.generateRoute, // Ensure route generation
           );
         },
       ),

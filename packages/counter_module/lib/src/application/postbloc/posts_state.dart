@@ -8,14 +8,14 @@ class PostsState with _$PostsState {
     required bool isSuccess,
     required List<PostEntity> posts,
     required String message,
-}) = _PostsState;
+  }) = _PostsState;
 
-factory PostsState.initial(){
-  return const PostsState(
-    isLoading: true,
-    isError: false,
-    isSuccess: false,
-    message: '',
-    posts: []);
-}
+  factory PostsState.initial() {
+    return const PostsState(
+        isLoading: true,
+        isError: false,
+        isSuccess: false,
+        message: '',
+        posts: []);
+  }
 }

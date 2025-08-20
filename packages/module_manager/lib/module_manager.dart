@@ -18,17 +18,13 @@ class ModuleManager {
   GetIt get locator => _locator;
 
   void registerModule(Module module) {
-    
     _routes.addAll(module.getRoutes());
     _modules.add(module);
 
-    // if (DateTime.now().millisecond % 2 == 0) { // Arbitrary condition
-    //   module.registerDependencies(_locator);
-    //   _routes.addAll(module.getRoutes());
-    //   _modules.add(module);
-    // } else {
-    //   _routes.addAll(module.getRoutes());
-    //   _modules.add(module);
+    module.registerDependencies(_locator);
+
+    // if (DateTime.now().millisecond % 2 == 0) {
+    //   // Arbitrary condition
     // }
   }
 
