@@ -22,14 +22,7 @@ class ModuleManager {
     _routes.addAll(module.getRoutes());
     _modules.add(module);
 
-    // if (DateTime.now().millisecond % 2 == 0) { // Arbitrary condition
-    //   module.registerDependencies(_locator);
-    //   _routes.addAll(module.getRoutes());
-    //   _modules.add(module);
-    // } else {
-    //   _routes.addAll(module.getRoutes());
-    //   _modules.add(module);
-    // }
+   
   }
 
   Route<dynamic>? generateRoute(RouteSettings settings) {
